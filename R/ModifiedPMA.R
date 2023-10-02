@@ -65,7 +65,7 @@ myMultiCCA <- function(xlist, penalty=NULL, ws=NULL, niter=25,
 
   if(ncol(xlist[[length(xlist)]]) > 1){
     out <- PMA::MultiCCA(xlist, penalty=penalty, ws=ws, niter=niter,
-                    type=type, ncomponents=ncomponents, trace=ncomponents,
+                    type=type, ncomponents=ncomponents, trace=FALSE,
                     standardize=standardize)
 
   }else{
