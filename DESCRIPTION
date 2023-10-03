@@ -1,7 +1,7 @@
 Package: SmCCNet
 Type: Package
 Title: Sparse Multiple Canonical Correlation Network Analysis Tool
-Version: 2.0.0
+Version: 2.0.1
 Date: 2023-9-13
 Author: 
     Weixuan Liu [aut, cre],
@@ -26,9 +26,9 @@ biocViews: Network
 RoxygenNote: 7.2.3
 NeedsCompilation: no
 VignetteBuilder: knitr
-Packaged: 2023-09-29 20:59:13 UTC; liux4
+Packaged: 2023-10-03 16:27:12 UTC; liux4
 Repository: CRAN
-Date/Publication: 2023-10-02 13:40:27 UTC
+Date/Publication: 2023-10-03 21:50:16 UTC
 Suggests: knitr, rmarkdown, testthat (>= 3.0.0), dplyr, reshape2,
         shadowtext, tidyverse, parallel, mltools, caret,
 Config/testthat/edition: 3

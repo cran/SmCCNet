@@ -1,4 +1,4 @@
-09578868d09247a5fd0b6d2188be8f5a *DESCRIPTION
+71ea1a45744a18eafd651f65567b24f8 *DESCRIPTION
 32c1a20ac91ff37045c12002d248a747 *NAMESPACE
 8ef252ebd71fd1df218f10f263f101b6 *R/AutoSmCCNet.R
 22c2ef0be5c11fa75e41ce94022bd02d *R/Data.R
@@ -13,13 +13,13 @@ a6de6a5339388b6ae63bf1f377a7dfff *data/ExampleData.RData
 7f1a7351996d7f2b4b7ebf0e7a955adc *inst/NEWS
 1a28db8b700de21f2fc424593b401478 *inst/doc/SmCCNet_Vignette_AutoSmCCNet.R
 baf67ba282f2fbc86a55d10d8fea9135 *inst/doc/SmCCNet_Vignette_AutoSmCCNet.Rmd
-ef07ef717b58d60c18556affaeb96645 *inst/doc/SmCCNet_Vignette_AutoSmCCNet.pdf
+94ebc4beb9ed5b15f889b2389d77883b *inst/doc/SmCCNet_Vignette_AutoSmCCNet.pdf
 4c3b790477ff52e61a7fe3da019eaabb *inst/doc/SmCCNet_Vignette_MultiOmics.R
-dbb872771e54e413dd01fe3b61d13c72 *inst/doc/SmCCNet_Vignette_MultiOmics.Rmd
-dd2e000e40c898a201d11a88c78c074c *inst/doc/SmCCNet_Vignette_MultiOmics.pdf
+0d7723b0c70c9f423cbd3b889292891c *inst/doc/SmCCNet_Vignette_MultiOmics.Rmd
+7849a8b41085cde96889d71ee14cccac *inst/doc/SmCCNet_Vignette_MultiOmics.pdf
 e472830c942ebcf54196034a01cd045c *inst/doc/SmCCNet_Vignette_SingleOmics.R
-8bb80823e6fb283c0dfc8f14ffb3ce12 *inst/doc/SmCCNet_Vignette_SingleOmics.Rmd
-6acba2816b9b79198283b95570c5f64b *inst/doc/SmCCNet_Vignette_SingleOmics.pdf
+c89d141c286bdd06aaf81b858e3c3c06 *inst/doc/SmCCNet_Vignette_SingleOmics.Rmd
+5358d159e4b2476ef27608a40334cac9 *inst/doc/SmCCNet_Vignette_SingleOmics.pdf
 4e969c068cf81f170182c88fad79e7b5 *inst/single-omics-smccnet.jpg
 b416e3a4cc8ae6f5af3e1c6987dc3321 *man/X1.Rd
 31c3958e0bbf2400c284b439c5973432 *man/X2.Rd
@@ -44,8 +44,8 @@ cfae682efa934e210877ea8631ae3151 *man/summarizeNetSHy.Rd
 c8534ed422fede6b861330c5199e966a *tests/testthat.R
 ca11977fa49015f36c57d0fb1a4b76c6 *tests/testthat/test-proprocessing.R
 baf67ba282f2fbc86a55d10d8fea9135 *vignettes/SmCCNet_Vignette_AutoSmCCNet.Rmd
-dbb872771e54e413dd01fe3b61d13c72 *vignettes/SmCCNet_Vignette_MultiOmics.Rmd
-8bb80823e6fb283c0dfc8f14ffb3ce12 *vignettes/SmCCNet_Vignette_SingleOmics.Rmd
+0d7723b0c70c9f423cbd3b889292891c *vignettes/SmCCNet_Vignette_MultiOmics.Rmd
+c89d141c286bdd06aaf81b858e3c3c06 *vignettes/SmCCNet_Vignette_SingleOmics.Rmd
 2959798a7b809da9e4c2270959307fd1 *vignettes/cat_size_79_net_1.Rdata
 247a5738e027a3ad8e8919af2d10b4f2 *vignettes/cont_size_16_net_1.Rdata
 4a60efc9dced28fcec0a67d1d12c0af6 *vignettes/example_network_cont.png

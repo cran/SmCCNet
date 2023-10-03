@@ -43,7 +43,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Workflow
 
-SmCCNet is a canonical correlation based integration method that reconstructs phenotype-specific multi-omics networks (Shi et al., 2019). The algorithm is based on sparse multiple canonical analysis (SmCCA) for $T$ omics data $X_1, X_2,...X_T$ and a quantitative phenotype $Y$ measured on the same subjects. SmCCA finds the canonical weights $w_1, w_2,...,w_T$ that maximize the (weighted or unweighted) sum of pairwise canonical correlations between $X_1, X_2, ..., X_T$ and $Y$, under some constraints (Equation \@ref(eq:smcca2)). In SmCCNet, the sparsity constraint functions $P_t(\cdot), t = 1,2,...,T$, are the least absolute shrinkage and selection operators (LASSO). The weighted version corresponds to $a_{i,j}, b_{i}$ (also called scaling factors), are not all equal; the unweighted version corresponds to $a_{i,j} = b_i = 1$ for all $i,j = 1,2,..., T$.
+SmCCNet is a canonical correlation based integration method that reconstructs phenotype-specific multi-omics networks (Shi et al., 2019). The algorithm is based on sparse multiple canonical analysis (SmCCA) for $T$ omics data $X_1, X_2,...X_T$ and a quantitative phenotype $Y$ measured on the same subjects. SmCCA finds the canonical weights $w_1, w_2,...,w_T$ that maximize the (weighted or unweighted) sum of pairwise canonical correlations between $X_1, X_2, ..., X_T$ and $Y$, under some constraints (Equation \ref{eq:smcca2}). In SmCCNet, the sparsity constraint functions $P_t(\cdot), t = 1,2,...,T$, are the least absolute shrinkage and selection operators (LASSO). The weighted version corresponds to $a_{i,j}, b_{i}$ (also called scaling factors), are not all equal; the unweighted version corresponds to $a_{i,j} = b_i = 1$ for all $i,j = 1,2,..., T$.
 
 \begin{eqnarray}
 \begin{split} 
@@ -56,9 +56,9 @@ SmCCNet is a canonical correlation based integration method that reconstructs ph
 
 
 
-The sparsity penalties $c_t$ influence how many features will be included in each subnetwork. With pre-selected sparsity penalties, the SmCCNet algorithm creates a network similarity matrix based on SmCCA canonical weights from repeated subsampled omics data and the phenotype, and then finds multi-omics modules that are relevant to the phenotype. The subsampling scheme improves network robustness by analyzing a subset of omics features multiple times and forms a final similarity matrix by aggregating results from each subsampling step. The general workflow (Figure \@ref(fig:flowchart)) involves three steps:
+The sparsity penalties $c_t$ influence how many features will be included in each subnetwork. With pre-selected sparsity penalties, the SmCCNet algorithm creates a network similarity matrix based on SmCCA canonical weights from repeated subsampled omics data and the phenotype, and then finds multi-omics modules that are relevant to the phenotype. The subsampling scheme improves network robustness by analyzing a subset of omics features multiple times and forms a final similarity matrix by aggregating results from each subsampling step. The general workflow (Figure \ref{fig:flowchart}) involves three steps:
 
-- Step I: Determine SmCCA sparsity penalties $c_t$. The user can select the penalties for omics feature selection based on the study purpose and/or prior knowledge. Alternatively, one can pick sparsity penalties based on a K-fold cross validation (CV) procedure that minimizes the total prediction error (Figure \@ref(fig:CVflow)). The K-fold CV procedure ensures selected penalties to be generalizable to similar independent data sets and prevents over-fitting. 
+- Step I: Determine SmCCA sparsity penalties $c_t$. The user can select the penalties for omics feature selection based on the study purpose and/or prior knowledge. Alternatively, one can pick sparsity penalties based on a K-fold cross validation (CV) procedure that minimizes the total prediction error (Figure \ref{fig:CVflow}). The K-fold CV procedure ensures selected penalties to be generalizable to similar independent data sets and prevents over-fitting. 
 - Step II: Randomly subsample omics features without replacement, apply SmCCA with chosen penalties, and compute a feature relationship matrix for each subset. Repeat the process many times and define the similarity matrix to be the average of all feature relationship matrices. 
 - Step III: Apply hierarchical tree cutting to the similarity matrix to find the multi-omics networks. This step simultaneously identifies multiple subnetworks.
 
@@ -179,10 +179,10 @@ processed_data <- lapply(X, function(Xmatrix){
 
 ## Step II: Determine optimal sparsity penalties through cross-validation (optional)
 
-For two omics data, to find the optimal sparsity penalties $c_1, c_2$, we apply a K-fold CV on the synthetic data (Figure \@ref(fig:CVflow)). Note that under LASSO constraints, $1\leq c_1\leq\sqrt{p_1s_1}, 1\leq c_2\leq\sqrt{p_2s_2}$, where $p_1,p_2$ denote the number of features in omics data $X_1, X_2$ respectively, and $s_1, s_2$ are the proportions of $X_1, X_2$ features to be sampled every time. The sparse penalties $c_1, c_2$ can be re-parametrized as $0<l_1, l_2\leq1$, such that $c_1 = \max\{1, l_1\sqrt{p_1s_1}\}, c_2 = \max\{1, l_2\sqrt{p_2s_2}\}$. Large penalty values correspond to more features in each subnetwork, while small penalties correspond to fewer features. Here is the list of parameters that need to be specified to perform a grid search for the penalty parameters:
+For two omics data, to find the optimal sparsity penalties $c_1, c_2$, we apply a K-fold CV on the synthetic data (Figure \ref{fig:CVflow}). Note that under LASSO constraints, $1\leq c_1\leq\sqrt{p_1s_1}, 1\leq c_2\leq\sqrt{p_2s_2}$, where $p_1,p_2$ denote the number of features in omics data $X_1, X_2$ respectively, and $s_1, s_2$ are the proportions of $X_1, X_2$ features to be sampled every time. The sparse penalties $c_1, c_2$ can be re-parametrized as $0<l_1, l_2\leq1$, such that $c_1 = \max\{1, l_1\sqrt{p_1s_1}\}, c_2 = \max\{1, l_2\sqrt{p_2s_2}\}$. Large penalty values correspond to more features in each subnetwork, while small penalties correspond to fewer features. Here is the list of parameters that need to be specified to perform a grid search for the penalty parameters:
 
 - $K$: Number of folds in CV. Typically a 5-fold CV is sufficient. If the training set contains too few (e.g. $<30$) samples, or the test or training set becomes unscalable, then choose a smaller $K$.
-- $CCcoef:$ Coefficients, $(a_{i,j}, b_{i})$ in Equation \@ref(eq:smcca2), for the weighted SmCCA. It can be either supplied manually or interatively (see code below).
+- $CCcoef:$ Coefficients, $(a_{i,j}, b_{i})$ in Equation \ref{eq:smcca2}, for the weighted SmCCA. It can be either supplied manually or interatively (see code below).
 - $PenExpand$: A penalty option matrix for $X_1, X_2$. Each row of $PenExpand$ is a pair of penalty options $l = (l_1, l_2)$, where $0<l_1, l_2<1$. Larger penalties correspond to more features to be included in each subnetwork. Typically, it is not necessary to search the entire range (0, 1), and a smaller grid (e.g. $0<l_1, l_2<.5$) may be sufficient. 
 - $X$ A list of omics data, where each omics data should contain same set and order of subjects.
 - $num\_omics$ The total number of omics data in $X$.
@@ -230,7 +230,7 @@ dir.create(CVDir)
 ```
 
 ### Create test and training data sets. 
-First, we need to split the data ($X_1, X_2, Y$) into test and training sets (Figure \@ref(fig:CVflow), Step I.1). All CCA methods require data sets to be standardized (centered and scaled) by columns (e.g. features). We have included the standardization step within the SmCCNet algorithm. However, for the CV procedure, we recommend to standardize the training and test sets upfront, since this helps to choose the number of CV folds $K$. If any data set can not be standardized, we recommend to reduce $K$. In the code below, we show how to create CV data sets. The standardized training and test data sets will be saved under the "Example3foldCV/" directory.
+First, we need to split the data ($X_1, X_2, Y$) into test and training sets (Figure \ref{fig:CVflow}, Step I.1). All CCA methods require data sets to be standardized (centered and scaled) by columns (e.g. features). We have included the standardization step within the SmCCNet algorithm. However, for the CV procedure, we recommend to standardize the training and test sets upfront, since this helps to choose the number of CV folds $K$. If any data set can not be standardized, we recommend to reduce $K$. In the code below, we show how to create CV data sets. The standardized training and test data sets will be saved under the "Example3foldCV/" directory.
 
 ```{r make K-fold quantitative, eval = FALSE}
 set.seed(12345) # set random seed.
@@ -274,7 +274,7 @@ scalingFactor <- scalingFactorInput(DataType = c('mRNA', 'miRNA', 'phenotype'))
 
 ### Run K-fold CV
 
-For each of the K-folds, we compute the prediction error for each penalty pair option (Figure \@ref(fig:CVflow), Step I.2). Since there is no subsampling step for cross-validation, we run through cross-validation with nested for loop. However, if the omics data are extremely high-dimensional, we recommend using the R package **parallel** to parallelize the for loop, or use **fastAutoSmCCNet()** directly. **fastAutoSmCCNet()** is the package built-in function that streamline the pipeline with single line of code, and the cross-validation step is parallelized with **future_map()** in the **furrr** package.  
+For each of the K-folds, we compute the prediction error for each penalty pair option (Figure \ref{fig:CVflow}, Step I.2). Since there is no subsampling step for cross-validation, we run through cross-validation with nested for loop. However, if the omics data are extremely high-dimensional, we recommend using the R package **parallel** to parallelize the for loop, or use **fastAutoSmCCNet()** directly. **fastAutoSmCCNet()** is the package built-in function that streamline the pipeline with single line of code, and the cross-validation step is parallelized with **future_map()** in the **furrr** package.  
 
 
 ```{r run CV, eval = FALSE}
@@ -324,7 +324,7 @@ for (CVidx in 1:K)
 
 ### Extract penalty pair with the smallest total prediction error
 
-Finally, we extract the total prediction errors  (Figure \@ref(fig:CVflow), Step I.3) and conclude the best penalty pair from the grid search as the pair with the smallest error (Figure \@ref(fig:CVflow), Step I.4). There are different ways to select the 
+Finally, we extract the total prediction errors  (Figure \ref{fig:CVflow}, Step I.3) and conclude the best penalty pair from the grid search as the pair with the smallest error (Figure \ref{fig:CVflow}, Step I.4). There are different ways to select the 
 best penalty terms, one of the simplest way is to minimize discrepancy between the training canonical 
 correlation and the testing canonical correlation. However, this method does not take the magnitude of 
 testing canonical correlation into account, which means it may end up selecting the penalty term with smaller 
@@ -350,7 +350,7 @@ optIdx <- which.min(EvalMetric)
 
 
 
-We can visualize the scaled prediction errors with a contour plot (Figure \@ref(fig:contourPlot)), note that this method only works for two omics data, if more than two omics data are used, please construct contour plot for each pair of omics data respectively. 
+We can visualize the scaled prediction errors with a contour plot (Figure \ref{fig:contourPlot}), note that this method only works for two omics data, if more than two omics data are used, please construct contour plot for each pair of omics data respectively. 
 
 ```{r contour, eval = FALSE}
 library(plotly)
@@ -409,7 +409,7 @@ write.csv(overallCVInfo, file = paste0(CVDir, 'overallCVInfo.csv'),
 print(overallCVInfo[optIdx,])
 ```
 
-Table \@ref(tab:errorTable) shows the total prediction error (scaledPredError) for all penalty options. Note that in this example, we are only including 25 optional penalty pairs. The fourth column (RhoTest) records the aggregated canonical correlations for the test data set.
+Table \ref{tab:errorTable} shows the total prediction error (scaledPredError) for all penalty options. Note that in this example, we are only including 25 optional penalty pairs. The fourth column (RhoTest) records the aggregated canonical correlations for the test data set.
 
 ```{r errorTable, echo = FALSE, eval = TRUE}
 knitr::kable(read.csv("../vignettes/results/overallCVInfo.csv"), caption = "Total Prediction Error from a 3-fold CV for the synthetic dataset")
@@ -418,7 +418,7 @@ knitr::kable(read.csv("../vignettes/results/overallCVInfo.csv"), caption = "Tota
 
 ## Step III: Run SmCCA with pre-selected penalty term
 
-With a pre-selected penalty pair, we apply SmCCA to subsampled features of $X_1, X_2$ and $Y$, and repeat the process to generate a robust similarity matrix (Figure \@ref(fig:flowchart), Step II). As for the number of subsamples, a larger number of subsamples leads to more accurate results, while a smaller number of subsamples is faster computationally. We use 50 in this example. In general, we recommend to subsample 500-1000 times or more. Below is the setup and description of the subsampling parameters:
+With a pre-selected penalty pair, we apply SmCCA to subsampled features of $X_1, X_2$ and $Y$, and repeat the process to generate a robust similarity matrix (Figure \ref{fig:flowchart}, Step II). As for the number of subsamples, a larger number of subsamples leads to more accurate results, while a smaller number of subsamples is faster computationally. We use 50 in this example. In general, we recommend to subsample 500-1000 times or more. Below is the setup and description of the subsampling parameters:
 
 - $s = (s_1,s_2)$: Proportions of feature subsampling from $X_1, X_2$. Default values are $s_1 = 0.7, s_2 = 0.9.$
 - $SubsamplingNum$: Number of subsamples.
@@ -444,7 +444,7 @@ Ws <- getRobustWeightsMulti(X,
 
 ## Step IV: Obtain multi-omics modules through network clustering
 
-From the canonical weights obtained in the last step, we can get multi-omics modules by constructing global adjacency matrix and applying hierarchical tree cutting and plotting the reconstructed networks (Figure \@ref(fig:flowchart)). The edge signs are recovered from pairwise feature correlations when visualizing the network. 
+From the canonical weights obtained in the last step, we can get multi-omics modules by constructing global adjacency matrix and applying hierarchical tree cutting and plotting the reconstructed networks (Figure \ref{fig:flowchart}). The edge signs are recovered from pairwise feature correlations when visualizing the network. 
 
 ```{r get modules, eval = FALSE}
 # construct adjacency matrix
@@ -552,7 +552,7 @@ ggplot(data = melted_cormat, aes(x=Var1, y=Var2, fill=value)) +
 
 ```
 
-Figure \@ref(fig:loadings1) is the visualization of the PC loadings that contribution of each molecular features to the first NetSHy PC. In addition, there are two network heatmaps based on (1) correlation matrix (Figure \@ref(fig:corheatmap)), and (2) adjacency matrix (Figure \@ref(fig:adjheatmap)). Based on the summarization table, genes 1,2,6,7, and miRNA 2 have relatively high correlation with respect to phenotype. The PC loadings also confirm that genes 6,7, and miRNA 2 and generally have higher PC contribution. From the correlation heatmap, we do not observe associations between molecular features, but for the adjacency matrix heatmap, we observe the higher connections between genes 6,7 and miRNA 2. We also recommend experimenting more PCs (up to 3) with Figure \@ref(fig:loadings1) to demonstrate the contribution of molecular features to each PC.
+Figure \ref{fig:loadings1} is the visualization of the PC loadings that contribution of each molecular features to the first NetSHy PC. In addition, there are two network heatmaps based on (1) correlation matrix (Figure \ref{fig:corheatmap}), and (2) adjacency matrix (Figure \ref{fig:adjheatmap}). Based on the summarization table, genes 1,2,6,7, and miRNA 2 have relatively high correlation with respect to phenotype. The PC loadings also confirm that genes 6,7, and miRNA 2 and generally have higher PC contribution. From the correlation heatmap, we do not observe associations between molecular features, but for the adjacency matrix heatmap, we observe the higher connections between genes 6,7 and miRNA 2. We also recommend experimenting more PCs (up to 3) with Figure \ref{fig:loadings1} to demonstrate the contribution of molecular features to each PC.
 
 ## Step VI: Visualize network module
 
@@ -560,7 +560,7 @@ The initial approach to network visualization is facilitated through our SmCCNet
 
 An alternative way to visualize the final network module, we need to download the Cytoscape software (Shannon et al., 2003), and use the package RCy3 to visualize the subnetwork generated from the network pruning step. In general, since the network obtained through the PageRank pruning algorithm is densely connected, and some of the edges may be false positive (meaning that two nodes are not associated, but with higher edge values in the adjacency matrix). Therefore, we use the correlation matrix to filter out those weak network edges.
 
-In the network visualization (Figure \@ref(fig:netPlot)),  different colored edges denote  different directions of the association between two nodes, where red or blue denotes a positive or negative association respectively. The width of the edge represents the connection strength between two nodes. 
+In the network visualization (Figure \ref{fig:netPlot}),  different colored edges denote  different directions of the association between two nodes, where red or blue denotes a positive or negative association respectively. The width of the edge represents the connection strength between two nodes. 
 
 
 ```{r, eval = FALSE}
@@ -981,7 +981,7 @@ dir.create(CVDir)
 
 ### Create test and training data sets. 
 
-Same as before, we need to split the data ($X_1, X_2, Y$) into test and training sets (Figure \@ref(fig:CVflow), Step I.1). Here we scale the complete dataset rather than each fold to increase the performance in predicting the testing phenotype:
+Same as before, we need to split the data ($X_1, X_2, Y$) into test and training sets (Figure \ref{fig:CVflow}, Step I.1). Here we scale the complete dataset rather than each fold to increase the performance in predicting the testing phenotype:
 
 ```{r make K-fold binary, eval = FALSE}
 set.seed(12345) # set random seed.
