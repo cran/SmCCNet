@@ -3,14 +3,12 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## ---- echo = FALSE, results = "hide", warning = FALSE, eval = TRUE------------
 suppressPackageStartupMessages({
-    library(PMA)
     library(pbapply)
     library(Matrix)
     library(igraph)
 })
 
 ## ---- eval = TRUE-------------------------------------------------------------
-library(PMA)
 library(pbapply)
 library(Matrix)
 library(igraph)

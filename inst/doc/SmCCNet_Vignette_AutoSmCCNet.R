@@ -17,7 +17,7 @@ knitr::opts_chunk$set(echo = TRUE)
 #  result <- fastAutoSmCCNet(X = list(X1), Y = Y, Kfold = 3,
 #                            preprocess = FALSE,
 #                            subSampNum = 50, DataType = c('Gene'),
-#                            saving_dir = getwd(), summarization = 'PCA',
+#                            saving_dir = getwd(), summarization = 'NetSHy',
 #                            CutHeight = 1 - 0.1^10)
 #  # multi-omics PLS
 #  result <- fastAutoSmCCNet(X = list(X1,X2), Y = as.factor(Y_binary),

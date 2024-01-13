@@ -1,12 +1,11 @@
 ## ----setup, include=FALSE-----------------------------------------------------
 knitr::opts_chunk$set(echo = TRUE)
 
-## ----flowchart, fig.cap = "SmCCNet workflow overview. X1 and X2 are two omics data types for the same set of n subjects. Y indicates a quantitative phenotype measure for those n subjects. Note that the flowchart demonstrate workflow for two omics data, it is also compatible with more than two omics data.", echo = FALSE,out.width='100%'----
-knitr::include_graphics("figures/SmCCNetWorkflow.pdf")
+## ----flowchart, fig.cap = "SmCCNet workflow overview for Quantitative Phenotype. X1, X2, and X3 are three omics data types for the same set of n subjects. Y indicates a quantitative phenotype measure for those n subjects. Note that the flowchart demonstrate workflow for three omics data, it is also compatible with more than three omics data or two omics data.", echo = FALSE,out.width='100%'----
+knitr::include_graphics("figures/SmCCNet-Quant.jpg")
 
 ## ---- echo = FALSE, results = "hide", warning = FALSE, eval = TRUE------------
 suppressPackageStartupMessages({
-    library(PMA)
     library(pbapply)
     library(Matrix)
     library(igraph)
@@ -15,7 +14,6 @@ suppressPackageStartupMessages({
 })
 
 ## ---- eval = TRUE-------------------------------------------------------------
-library(PMA)
 library(pbapply)
 library(Matrix)
 library(igraph)
@@ -43,6 +41,10 @@ AbarLabel <- c(colnames(cbind(X1, X2)))
 #    as.matrix(dataPreprocess(X = as.data.frame(Xmatrix), covariates = NULL,
 #                    is_cv = TRUE, cv_quantile = 0.2, center = TRUE,
 #                   scale = TRUE))})
+#  # re-standardize -omics data if regress-out approach is used (covariates != NULL)
+#  processed_data <- lapply(processed_data, scale)
+#  # if preprocess feature is used, X need to be overrided with the following code
+#  X <- processed_data
 
 ## ----CVflow, fig.cap = "SmCCNet K-fold CV. The best penalty pairs are chosen based on the smallest total prediction error.", echo = FALSE, out.width='100%'----
 knitr::include_graphics("figures/SmCCNetCV.png")
@@ -526,6 +528,9 @@ knitr::include_graphics("../vignettes/figures/MultiOmicsNet.png")
 #                                   +1):(ncol(utils::combn(num_omics +
 #                                   1, 2))+num_omics)]), s = s,
 #                          SubsamplingNum = SubsamplingNum)
+
+## ----flowchart-binary, fig.cap = "SmCCNet workflow overview for Binary Phenotype. X1, X2, and X3 are three omics data types for the same set of n subjects. Y indicates a Binary phenotype measure for those n subjects. Note that the flowchart demonstrate workflow for three omics data, it is also compatible with more than three omics data or two omics data.", echo = FALSE,out.width='100%'----
+knitr::include_graphics("figures/SmCCNet-Binary.jpg")
 
 ## ----example data binary------------------------------------------------------
 data(ExampleData)
