@@ -227,8 +227,8 @@ list_cols <- as.list(as.data.frame(penSelect))
 PenExpand <- do.call(expand.grid, list_cols)
 
 # set a CV directory.
-CVDir <- "Example3foldCV/" 
-dir.create(CVDir)
+CVDir <- file.path(tempdir(),"Example3foldCV")
+dir.create(CVDir,showWarnings = FALSE)
 ```
 
 ### Create test and training data sets. 
@@ -655,8 +655,8 @@ list_cols <- as.list(as.data.frame(penSelect))
 PenExpand <- do.call(expand.grid, list_cols)
 
 # set a CV directory.
-CVDir <- "Example3foldCVTune/" 
-dir.create(CVDir)
+CVDir <- file.path(tempdir(),"Example3foldCVTune")
+dir.create(CVDir,showWarnings = FALSE)
 ```
 
 Same as above, we split the original data into K different folds for evaluation: 
@@ -979,8 +979,8 @@ list_cols <- as.list(as.data.frame(penSelect))
 PenExpand <- do.call(expand.grid, list_cols)
 
 # set a CV directory.
-CVDir <- "Example3foldCVBinary/" 
-dir.create(CVDir)
+CVDir <- file.path(tempdir(),"Example3foldCVBinary")
+dir.create(CVDir,showWarnings = FALSE)
 ```
 
 

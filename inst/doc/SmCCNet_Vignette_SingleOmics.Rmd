@@ -178,9 +178,9 @@ subSamp <- 50 # number of subsamples (will be described in later section).
 pen1 <- seq(.05, .3, by = .05)
 
 # set a CV directory.
-CVDir <- "Example3foldCV/" 
 pheno <- "Example3foldCV"
-dir.create(CVDir)
+CVDir <- file.path(tempdir(),"Example3foldCV")
+dir.create(CVDir,showWarnings = FALSE)
 ```
 
 
@@ -417,7 +417,7 @@ for(i in 1:length(network_modules))
                  data = X1[,network_modules[[i]]],      
 			  Pheno = Y, ModuleIdx = i, min_mod_size = 10, 
                           max_mod_size = 100, method = 'PCA', 
-                          saving_dir = getwd())
+                          saving_dir = tempdir())
   cat("\n")
 }
 ```
@@ -557,9 +557,9 @@ metric <- 'auc' # evaluation metric to be used.
 pen1 <- seq(.1, .9, by = .1)
 
 # set a CV directory.
-CVDir <- "Example3foldCV_Binary/" 
 pheno <- "Example3foldCV_Binary"
-dir.create(CVDir)
+CVDir <- file.path(tempdir(),"Example3foldCV_Binary")
+dir.create(CVDir,showWarnings = FALSE)
 
 Y <- ifelse(Y > median(Y), 1, 0)
 ```
