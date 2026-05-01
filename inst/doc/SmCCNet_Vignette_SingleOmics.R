@@ -223,12 +223,12 @@ ggplot(data = melted_cormat, aes(x=Var1, y=Var2, fill=value)) +
    labs(title = "Correlation Heatmap of Network Features") + 
   theme(plot.title.position = "plot")
 
-## ----adjheatmap, echo = FALSE, warning = FALSE, message = FALSE, out.width="100%", fig.cap = "Adjacency matrix heatmap for subnetwork features."----
+## ----adjheatmap, echo = FALSE, warning = FALSE, message = FALSE, out.width="100%", fig.cap = "Similarity matrix heatmap for subnetwork features."----
 ###### Correlation heatmap
 melted_cormat <- melt(as.matrix(M))
 ggplot(data = melted_cormat, aes(x=Var1, y=Var2, fill=value)) + 
   geom_tile() +
-   labs(title = "Adjacency Matrix Heatmap of Network Features") + 
+   labs(title = "Similarity Matrix Heatmap of Network Features") + 
   theme(plot.title.position = "plot")
 
 
@@ -259,7 +259,7 @@ ggplot(data = melted_cormat, aes(x=Var1, y=Var2, fill=value)) +
 # createNetworkFromIgraph(graph,"single_omics_network")
 
 ## ----netPlot, out.width="100%", fig.cap = "Trimmed module 1. The strength of the node connections is indicated by the thickness of edges. Red edges and blue edges are for negative and positive connections respectively.", echo = FALSE----
-knitr::include_graphics("../vignettes/example_network_cont.png")
+knitr::include_graphics("example_network_cont.png")
 
 ## ----example data binary------------------------------------------------------
 data(ExampleData)
